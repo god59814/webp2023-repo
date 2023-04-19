@@ -40,31 +40,21 @@
     <button onclick="next()">下一頁</button>
   </body>
   <script>
-  //const endPoint = 'https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6';
-  
-  fetch('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6')
-  .then((response) => {
-        console.log(response); 
-    })
-    .catch((error) => {
-        console.log(`Error: ${error}`);
-    })
-  /*var openUrl = "https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6";
+   var dataset;
+  fetch ('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6', {
+    method:'GET'})
+.then(res => {
+     return res.text();
+  }).then(result => {
+      dataset = JSON.parse(result);
+      add(dataset);
+  })
   var currentPage = 1;
   var totalPages = 1;
   var pageSize = 10; 
-  var dataset = [];
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET',openUrl,true);
-  xhr.send();
-  xhr.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-      dataset = JSON.parse(this.responseText);
-      add();
-      update(); 
-    }
-    //console.log(dataset.length)
-  };*/
+
+  add();
+  update(); 
     
   function add(){
     totalPages = Math.ceil(dataset.length / pageSize); 
